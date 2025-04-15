@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>tg: @wRelsick</title>
+  <style>
+    body {
+    h1 {
+        color: white;
+    }
+
+    background-color: black;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .clickDiv {
+      height: 500px;
+      width: 200px;
+      cursor: pointer;
+      background-color: white;
+    }
+    .stats {
+      margin: 20px;
+      font-size: 24px;
+      color: white;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Clickin' the absolute white</h1>
+  <div class="stats">
+    Clicks: <span id="clicks">0</span><br>
+    Double: <span id="multiplier">1</span>x
+  </div>
+  <center>
+  <div id="clickTarget" class="clickDiv">by: @wRelsick</div>
+  </center>
+  <div>
+    <button onclick="buyMultiplier()">Buy double (cost: <span id="cost">10</span> clicks)</button>
+  </div>
+
+  <script>
+    let clicks = 0;
+    let multiplier = 1;
+    let multiplierCost = 10;
+
+    const clicksDisplay = document.getElementById("clicks");
+    const multiplierDisplay = document.getElementById("multiplier");
+    const costDisplay = document.getElementById("cost");
+
+    document.getElementById("clickTarget").addEventListener("click", () => {
+      clicks += multiplier;
+      clicksDisplay.textContent = clicks;
+    });
+
+    function buyMultiplier() {
+      if (clicks >= multiplierCost) {
+        clicks -= multiplierCost;
+        multiplier++;
+        multiplierCost = Math.floor(multiplierCost * 1.5);
+
+        clicksDisplay.textContent = clicks;
+        multiplierDisplay.textContent = multiplier;
+        costDisplay.textContent = multiplierCost;
+      } else {
+        alert("Not enough clicks!");
+      }
+    }
+  </script>
+
+</body>
+</html>
